@@ -7,6 +7,7 @@ using CommunityToolkit.Maui;
 namespace LAB5_MAUI
 {
     public static class MauiProgram
+
     {
         public static MauiApp CreateMauiApp()
         {
