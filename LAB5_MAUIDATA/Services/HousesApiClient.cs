@@ -12,25 +12,47 @@ namespace LAB5_MAUIDATA.Services
     {
         private readonly HttpClient _httpClient;
 
-        public static string BaseAddress = DeviceInfo.Platform == DevicePlatform.Android ? "http://10.0.2.2:5205" : "http://localhost:5205";
+        public static string BaseAddress = DeviceInfo.Platform == DevicePlatform.Android ? "http://10.0.2.2:5253" : "http://localhost:5253";
 
         public HouseApiClient()
         {
             _httpClient = new HttpClient();
         }
+        //public async Task<T[]> GetItemsAsync<T>(string url) where T : class
+        //{
+        //    var request = new HttpRequestMessage(HttpMethod.Get, $"{BaseAddress}/{url}");
+        //    var response = await _httpClient.SendAsync(request);
+
+        //    response.EnsureSuccessStatusCode();
+
+        //    var json = await response.Content.ReadAsStringAsync();
+
+        //    var items = JsonConvert.DeserializeObject<T[]>(json);
+
+        //    return items;
+        //}
+
         public async Task<T[]> GetItemsAsync<T>(string url) where T : class
         {
-            var request = new HttpRequestMessage(HttpMethod.Get, $"{BaseAddress}/{url}");
-            var response = await _httpClient.SendAsync(request);
+            try
+            {
+                var request = new HttpRequestMessage(HttpMethod.Get, $"{BaseAddress}/{url}");
+                var response = await _httpClient.SendAsync(request);
 
-            response.EnsureSuccessStatusCode();
+                response.EnsureSuccessStatusCode();
 
-            var json = await response.Content.ReadAsStringAsync();
+                var json = await response.Content.ReadAsStringAsync();
+                var items = JsonConvert.DeserializeObject<T[]>(json);
 
-            var items = JsonConvert.DeserializeObject<T[]>(json);
-
-            return items;
+                return items;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error in GetItemsAsync: {ex.Message}");
+                throw;
+            }
         }
+
 
         public async Task DeleteItemAsync(string url)
         {

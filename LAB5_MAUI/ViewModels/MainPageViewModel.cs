@@ -6,8 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using GalaSoft.MvvmLight.Command;
-
+using CommunityToolkit.Mvvm.Input;
 
 namespace LAB5_MAUI.ViewModels
 {
@@ -26,16 +25,7 @@ namespace LAB5_MAUI.ViewModels
             LoadData();
         }
 
-        //public async void ShowDetails()
-        //{
-        //    var navigationParameter = new ShellNavigationQueryParameters
-        //    {
-        //        { "House", SelectHouseCommand }
-        //    };
-
-        //    await Shell.Current.GoToAsync("//AddressPage", navigationParameter);
-        //}
-
+        
         private string _title;
 
         public string Title
@@ -84,3 +74,14 @@ namespace LAB5_MAUI.ViewModels
         }
     }
 }
+
+
+//public async void ShowDetails()
+//{
+//    var navigationParameter = new ShellNavigationQueryParameters
+//    {
+//        { "House", SelectHouseCommand }
+//    };
+
+//    await Shell.Current.GoToAsync("//AddressPage", navigationParameter);
+//}
