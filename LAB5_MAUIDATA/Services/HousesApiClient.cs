@@ -18,40 +18,33 @@ namespace LAB5_MAUIDATA.Services
         {
             _httpClient = new HttpClient();
         }
-        //public async Task<T[]> GetItemsAsync<T>(string url) where T : class
-        //{
-        //    var request = new HttpRequestMessage(HttpMethod.Get, $"{BaseAddress}/{url}");
-        //    var response = await _httpClient.SendAsync(request);
-
-        //    response.EnsureSuccessStatusCode();
-
-        //    var json = await response.Content.ReadAsStringAsync();
-
-        //    var items = JsonConvert.DeserializeObject<T[]>(json);
-
-        //    return items;
-        //}
 
         public async Task<T[]> GetItemsAsync<T>(string url) where T : class
         {
             try
             {
-                var request = new HttpRequestMessage(HttpMethod.Get, $"{BaseAddress}/{url}");
+                var fullUrl = $"{BaseAddress}/{url}";
+                Console.WriteLine($"Sending url: {fullUrl}");
+
+                var request = new HttpRequestMessage(HttpMethod.Get, fullUrl);
                 var response = await _httpClient.SendAsync(request);
+
+                Console.WriteLine($"Response status: {response.StatusCode}");
 
                 response.EnsureSuccessStatusCode();
 
                 var json = await response.Content.ReadAsStringAsync();
-                var items = JsonConvert.DeserializeObject<T[]>(json);
+                Console.WriteLine($"Response JSON: {json}");
 
-                return items;
+                return JsonConvert.DeserializeObject<T[]>(json);
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error in GetItemsAsync: {ex.Message}");
+                Console.WriteLine($"Error in GetItemsAsync: {ex}");
                 throw;
             }
         }
+
 
 
         public async Task DeleteItemAsync(string url)

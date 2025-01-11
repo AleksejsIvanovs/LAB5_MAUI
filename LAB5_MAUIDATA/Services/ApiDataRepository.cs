@@ -16,6 +16,13 @@ namespace LAB5_MAUIDATA.Services
         {
             _houseApiClient = apiClient;
         }
+
+        public async Task<House[]> GetHouseAsync()
+        {
+            var result = await _houseApiClient.GetItemsAsync<House>(HouseApiConstants.HousesUrl);
+            return result;
+        }
+
         public async Task DeleteAddress(int studentId, int addressId)
         {
             await _houseApiClient
@@ -39,12 +46,6 @@ namespace LAB5_MAUIDATA.Services
         {
             var result = await _houseApiClient
                 .GetItemsAsync <Garage>($"{HouseApiConstants.HousesUrl}/{houseId}/{HouseApiConstants.GaragesUrl}");
-            return result;
-        }
-
-        public async Task<House[]> GetHouseAsync()
-        {
-            var result = await _houseApiClient.GetItemsAsync<House>(HouseApiConstants.HousesUrl);
             return result;
         }
 

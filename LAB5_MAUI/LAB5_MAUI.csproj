@@ -61,6 +61,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <AndroidResource Remove="Platforms\Android\Resources\xml\network_security_config.xml" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="CommunityToolkit.Maui" Version="10.0.0" />
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
 		<PackageReference Include="Microsoft.Maui.Controls" Version="9.0.22" />

@@ -69,6 +69,8 @@ namespace LAB5_MAUI.ViewModels
             Title = "Loading ...";
 
             var data = await _dataRepository.GetHouseAsync();
+            Console.WriteLine($"DATA=======: {data}");
+
             Houses = data;
             Title = "Number of houses: " + data.Length;
         }
