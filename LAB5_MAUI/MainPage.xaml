@@ -25,26 +25,37 @@
         Command="{Binding LoadCommand}"
         HorizontalOptions="Fill" />
 
+            <Grid ColumnDefinitions="Auto,*,*,*"
+                  BackgroundColor="#E0E0E0"
+                  Padding="10"
+                  Margin="0,10,0,0">
+                <Label Text="Owner" FontAttributes="Bold" Grid.Column="0" VerticalTextAlignment="Center" />
+                <Label Text="Year Built" FontAttributes="Bold" Grid.Column="1" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" />
+                <Label Text="Area" FontAttributes="Bold" Grid.Column="2" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" />
+                <Label Text="Floors" FontAttributes="Bold" Grid.Column="3" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" />
+            </Grid>
             <ListView x:Name="Lv1"
-              ItemsSource="{Binding Houses}"
-              SelectedItem="{Binding SelectedHouse}">
+                      ItemsSource="{Binding Houses}"
+                      SelectedItem="{Binding SelectedHouse}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <StackLayout Orientation="Horizontal" Spacing="10" Margin="10">
-                                <Label Text="{Binding Owner}" />
-                                <Label Text="{Binding Owner}" />
-                                <Label Text="{Binding Area}" />
-                                <Label Text="{Binding Floors}" />
-                            </StackLayout>
+                            <Grid ColumnDefinitions="*,*,*,*"
+                                  Padding="10"
+                                  BackgroundColor="{Binding IsSelected, Converter={StaticResource BoolToColorConverter}}">
+                                <Label Text="{Binding Owner}" Grid.Column="0"  VerticalTextAlignment="Center" />
+                                <Label Text="{Binding YearBuilt}" Grid.Column="1" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" />
+                                <Label Text="{Binding Area}" Grid.Column="2" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" />
+                                <Label Text="{Binding Floors}" Grid.Column="3" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" />
+                            </Grid>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
                 <ListView.Behaviors>
                     <toolkit:EventToCommandBehavior
-                EventName="ItemSelected"
-                Command="{Binding SelectsHouseCommand}"
-                EventArgsConverter="{StaticResource SelectedItemEventArgsConverter}" />
+                        EventName="ItemSelected"
+                        Command="{Binding SelectsHouseCommand}"
+                        EventArgsConverter="{StaticResource SelectedItemEventArgsConverter}" />
                 </ListView.Behaviors>
             </ListView>
         </VerticalStackLayout>

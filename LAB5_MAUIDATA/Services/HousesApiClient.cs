@@ -24,17 +24,14 @@ namespace LAB5_MAUIDATA.Services
             try
             {
                 var fullUrl = $"{BaseAddress}/{url}";
-                Console.WriteLine($"Sending url: {fullUrl}");
 
                 var request = new HttpRequestMessage(HttpMethod.Get, fullUrl);
                 var response = await _httpClient.SendAsync(request);
 
-                Console.WriteLine($"Response status: {response.StatusCode}");
 
                 response.EnsureSuccessStatusCode();
 
                 var json = await response.Content.ReadAsStringAsync();
-                Console.WriteLine($"Response JSON: {json}");
 
                 return JsonConvert.DeserializeObject<T[]>(json);
             }
